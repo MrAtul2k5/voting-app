@@ -5,6 +5,12 @@ import { FaVoteYea } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdAccessTime, MdOutlineTimerOff } from "react-icons/md";
 
+// ✅ BASE URL
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000"
+    : "https://voting-app-bywq.onrender.com"; // 👈 change if different
+
 export default function CreatePoll({ refreshPolls, onClose }) {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", ""]);
@@ -29,7 +35,7 @@ export default function CreatePoll({ refreshPolls, onClose }) {
     try {
       setLoading(true);
 
-      await axios.post("http://localhost:5000/api/polls", {
+      await axios.post(`${BASE_URL}/api/polls`, {
         question,
         options,
         startTime,
@@ -70,15 +76,13 @@ export default function CreatePoll({ refreshPolls, onClose }) {
         <FaVoteYea /> Create Poll
       </h2>
 
-      {/* Question */}
       <input
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         placeholder="Enter your question..."
-        className="w-full p-3 mb-4 bg-black/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="w-full p-3 mb-4 bg-black/50 border border-gray-600 rounded-lg text-white"
       />
 
-   
       {options.map((opt, i) => (
         <div key={i} className="flex gap-2 mb-2">
           <input
@@ -92,59 +96,29 @@ export default function CreatePoll({ refreshPolls, onClose }) {
             className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white"
           />
           {options.length > 2 && (
-            <button
-              onClick={() => removeOption(i)}
-              className="text-red-400 hover:scale-110"
-            >
-              <IoClose size={20} />
+            <button onClick={() => removeOption(i)}>
+              <IoClose />
             </button>
           )}
         </div>
       ))}
 
-      <button
-        onClick={addOption}
-        className="text-green-400 mb-4 hover:underline"
-      >
-        + Add Option
-      </button>
+      <button onClick={addOption}>+ Add Option</button>
 
-      {/* TIME SECTION */}
       <div className="grid grid-cols-2 gap-3 mb-4">
-
-        
-        <div>
-          <label className="text-sm text-gray-400 mb-1 flex items-center gap-1">
-            <MdAccessTime /> Start Time
-          </label>
-          <input
-            type="datetime-local"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white focus:ring-2 focus:ring-green-500"
-          />
-        </div>
-
-       
-        <div>
-          <label className="text-sm text-gray-400 mb-1 flex items-center gap-1">
-            <MdOutlineTimerOff /> End Time
-          </label>
-          <input
-            type="datetime-local"
-            value={expiryTime}
-            onChange={(e) => setExpiryTime(e.target.value)}
-            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white focus:ring-2 focus:ring-red-500"
-          />
-        </div>
-
+        <input
+          type="datetime-local"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+        />
+        <input
+          type="datetime-local"
+          value={expiryTime}
+          onChange={(e) => setExpiryTime(e.target.value)}
+        />
       </div>
 
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-lg text-black font-semibold hover:scale-105 transition flex items-center justify-center gap-2"
-      >
-        <FaVoteYea />
+      <button onClick={handleSubmit}>
         {loading ? "Creating..." : "Create Poll"}
       </button>
     </div>

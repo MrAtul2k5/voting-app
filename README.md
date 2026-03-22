@@ -42,7 +42,12 @@ Expired Poll      --------  ![alt text](image-4.png)
 
 
 
+<<<<<<< HEAD
 REPO installation instruction:- 
+=======
+
+
+>>>>>>> d29c26b (updated api to render backend)
 ===>  clone this repo to your local system 
 ===>  open this to vs code
 ===> to start the frontend you have to use the terminal and use command _ cd client-project
@@ -54,5 +59,8 @@ REPO installation instruction:-
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d29c26b (updated api to render backend)
