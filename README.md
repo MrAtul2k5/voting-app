@@ -36,11 +36,13 @@ Header portion     ------   ![alt text](image.png)    used to filter the page to
 All Voting polls  -------   ![alt text](image-2.png)  shows all polls (new-old , active-expired)
 
 Active Voting polls ------- ![alt text](image-3.png)  show all active polls
+Expired Poll      --------  ![alt text](image-4.png)
 
 
 
 
 
+REPO installation instruction:- 
 ===>  clone this repo to your local system 
 ===>  open this to vs code
 ===> to start the frontend you have to use the terminal and use command _ cd client-project
@@ -49,7 +51,7 @@ Active Voting polls ------- ![alt text](image-3.png)  show all active polls
          then use "dev": "node server.js" in backend -> package.json & run npm run dev (install nodemon recommended)
 ===> to use db make a cluster in mongodb atlas and connect your cluster by giving your username and password
 
-Expired Poll      --------  ![alt text](image-4.png)
+
 
 
 
