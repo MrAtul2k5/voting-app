@@ -30,7 +30,7 @@ const Signin = ({ onLogin, switchToSignup }) => {
     <div className="min-h-screen flex items-center justify-center bg-black p-4">
       <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 w-full max-w-md shadow-2xl">
         <h2 className="text-3xl font-bold text-center text-white mb-8 flex justify-center items-center gap-2">
-          <FaSignInAlt className="text-indigo-500" /> Sign In
+          <FaSignInAlt className="text-indigo-500" /> Log In
         </h2>
         
         <div className="space-y-4">

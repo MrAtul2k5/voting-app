@@ -11,7 +11,11 @@ const jwt = require("jsonwebtoken");
 const User = require("./model/User");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin:"https://voting-app-woad.vercel.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+
+}));
 app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || "career_nav_secret";
@@ -29,6 +33,7 @@ mongoose
 app.post("/api/auth/register", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ email, password: hashedPassword });
     await user.save();
