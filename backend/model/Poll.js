@@ -24,7 +24,7 @@ const pollSchema = new mongoose.Schema({
     required: true,
   },
 
-  //  important for vote tracking
+  
   votesByIP: [
     {
       ip: String,

@@ -29,8 +29,16 @@ UI with Tailwind CSS (to make it attractive)
 
 ==>   Images
 
+create Accout ------- ![alt text](image-5.png)
+Login credentials and get access to the app -----------  ![alt text](image-6.png)
 
-Create Voting Poll ------   ![alt text](image-1.png)  used to create the poll
+
+Landing page after login --------  ![alt text](image-7.png)
+
+
+Create Voting Poll ------   ![alt text](image-8.png) used to create the poll
+
+
 Header portion     ------   ![alt text](image.png)    used to filter the page to show active and expired polls by filter button (contains options _ All, Active and expired)
 
 All Voting polls  -------   ![alt text](image-2.png)  shows all polls (new-old , active-expired)
@@ -42,12 +50,11 @@ Expired Poll      --------  ![alt text](image-4.png)
 
 
 
-<<<<<<< HEAD
+
 REPO installation instruction:- 
-=======
 
 
->>>>>>> d29c26b (updated api to render backend)
+
 ===>  clone this repo to your local system 
 ===>  open this to vs code
 ===> to start the frontend you have to use the terminal and use command _ cd client-project
@@ -57,10 +64,3 @@ REPO installation instruction:-
 ===> to use db make a cluster in mongodb atlas and connect your cluster by giving your username and password
 
 
-
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d29c26b (updated api to render backend)

@@ -13,12 +13,7 @@ export default function CreatePoll({ refreshPolls, onClose }) {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    if (
-      !question.trim() ||
-      options.some((o) => !o.trim()) ||
-      !startTime ||
-      !expiryTime
-    ) {
+    if (!question.trim() || options.some((o) => !o.trim()) || !startTime || !expiryTime) {
       return toast.error("Fill all fields!");
     }
 
@@ -28,7 +23,6 @@ export default function CreatePoll({ refreshPolls, onClose }) {
 
     try {
       setLoading(true);
-
       await axios.post("http://localhost:5000/api/polls", {
         question,
         options,
@@ -37,15 +31,8 @@ export default function CreatePoll({ refreshPolls, onClose }) {
       });
 
       toast.success("Poll Created 🚀");
-
-      setQuestion("");
-      setOptions(["", ""]);
-      setStartTime("");
-      setExpiryTime("");
-
-      refreshPolls && refreshPolls();
-      onClose && onClose();
-
+      refreshPolls?.();
+      onClose?.();
     } catch (err) {
       toast.error("Error creating poll");
     } finally {
@@ -64,13 +51,19 @@ export default function CreatePoll({ refreshPolls, onClose }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-700 p-6 rounded-2xl w-full max-w-md mx-auto mb-10 shadow-lg">
+    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-700 p-6 rounded-2xl w-full max-w-md mx-auto mb-10 shadow-lg relative">
+    
+      <button 
+        onClick={onClose}
+        className="absolute top-4 right-4 text-gray-500 hover:text-red-400 transition-colors"
+      >
+        <IoClose size={24} />
+      </button>
 
       <h2 className="text-2xl font-bold text-green-400 mb-5 text-center flex items-center justify-center gap-2">
         <FaVoteYea /> Create Poll
       </h2>
 
-      {/* Question */}
       <input
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
@@ -78,7 +71,6 @@ export default function CreatePoll({ refreshPolls, onClose }) {
         className="w-full p-3 mb-4 bg-black/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
       />
 
-   
       {options.map((opt, i) => (
         <div key={i} className="flex gap-2 mb-2">
           <input
@@ -89,64 +81,52 @@ export default function CreatePoll({ refreshPolls, onClose }) {
               setOptions(newOpts);
             }}
             placeholder={`Option ${i + 1}`}
-            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white"
+            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white outline-none focus:border-green-500"
           />
           {options.length > 2 && (
-            <button
-              onClick={() => removeOption(i)}
-              className="text-red-400 hover:scale-110"
-            >
+            <button onClick={() => removeOption(i)} className="text-red-400 hover:scale-110">
               <IoClose size={20} />
             </button>
           )}
         </div>
       ))}
 
-      <button
-        onClick={addOption}
-        className="text-green-400 mb-4 hover:underline"
-      >
+      <button onClick={addOption} className="text-green-400 mb-4 hover:underline text-sm font-medium">
         + Add Option
       </button>
 
-      {/* TIME SECTION */}
-      <div className="grid grid-cols-2 gap-3 mb-4">
-
-        
+      <div className="grid grid-cols-2 gap-3 mb-6">
         <div>
-          <label className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+          <label className="text-xs text-gray-400 mb-1 flex items-center gap-1">
             <MdAccessTime /> Start Time
           </label>
           <input
             type="datetime-local"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
-            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white focus:ring-2 focus:ring-green-500"
+            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-xs text-white"
           />
         </div>
-
-       
         <div>
-          <label className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+          <label className="text-xs text-gray-400 mb-1 flex items-center gap-1">
             <MdOutlineTimerOff /> End Time
           </label>
           <input
             type="datetime-local"
             value={expiryTime}
             onChange={(e) => setExpiryTime(e.target.value)}
-            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-white focus:ring-2 focus:ring-red-500"
+            className="w-full p-2 bg-black/50 border border-gray-600 rounded text-xs text-white"
           />
         </div>
-
       </div>
 
-      {/* Submit */}
       <button
         onClick={handleSubmit}
-        className="w-full bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-lg text-black font-semibold hover:scale-105 transition flex items-center justify-center gap-2"
+        disabled={loading}
+        className="w-full bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-lg text-black font-bold hover:scale-[1.02] active:scale-95 transition flex items-center justify-center gap-2 disabled:opacity-50"
       >
         <FaVoteYea />
-        {loading ? "Creating..." : "Create Poll"}
+        {loading ? "Creating..." : "Launch Poll"}
       </button>
     </div>
   );
